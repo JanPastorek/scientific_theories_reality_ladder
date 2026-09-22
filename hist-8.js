@@ -1,0 +1,201 @@
+const HIST_8 = {
+
+qchem: {
+ origin:[
+  {y:'1913–25', who:'Bohr; Lewis; Langmuir', t:'Electrons in shells, before mechanics',
+   b:'Bohr\'s quantised orbits gave a shell picture of the atom; Lewis independently proposed the shared electron pair in 1916 on purely chemical grounds — before there was any quantum mechanics to justify it. Chemistry had a working theory of the bond for a decade with no underlying physics.'},
+  {y:'1927', who:'Heitler & London', t:'The first quantum calculation of a chemical bond',
+   b:'Working in Zurich, they compute the H₂ ground state with a two-electron trial function that is symmetric under exchange. The binding comes overwhelmingly from the *exchange* term — a purely quantum effect with no classical analogue. They obtained about 70% of the experimental binding energy. London reportedly said the calculation showed chemistry was now "in principle" solved.'},
+  {y:'1927', who:'Burrau', t:'H₂⁺ solved exactly',
+   b:'The one-electron molecular ion is separable in prolate spheroidal coordinates and can be solved to arbitrary accuracy. It is the *only* molecule for which this is true, and it remains the benchmark against which approximations are calibrated.'},
+  {y:'1927', who:'Born & Oppenheimer', t:'The approximation that creates molecular structure',
+   b:'A systematic expansion in κ = (m_e/M)^{1/4}. Clamping the nuclei defines a potential energy surface, and on that surface the language of molecular geometry, conformation, reaction path and transition state becomes available. Everything chemistry talks about lives on an object that the exact molecular Hamiltonian does not contain.'},
+  {y:'1929', who:'Dirac', t:'The famous sentence, and its second half',
+   b:'"The underlying physical laws necessary for the mathematical theory of a large part of physics and the whole of chemistry are thus completely known, and the difficulty is only that the exact application of these laws leads to equations much too complicated to be soluble." The second clause is routinely omitted, and it is where the philosophy is.'},
+  {y:'1928–51', who:'Hartree; Fock; Slater; Roothaan', t:'Self-consistent fields',
+   b:'Each electron moves in the averaged field of the others, solved iteratively to self-consistency. Fock adds antisymmetry (exchange); Roothaan casts it in a finite basis so it can be done by machine. Hartree\'s early calculations were performed on a mechanical differential analyser built partly from Meccano.'},
+  {y:'1964–65', who:'Hohenberg, Kohn & Sham', t:'Density functional theory',
+   b:'Hohenberg and Kohn prove that the ground-state electron density — a function of three variables rather than 3N — determines the external potential and hence everything else. Kohn and Sham make it computable via a fictitious non-interacting system. The exact exchange–correlation functional exists and is unknown; several hundred approximations to it are in use. Nobel 1998.'},
+  {y:'2020–', who:'Jumper et al. (AlphaFold)', t:'Prediction without the physics',
+   b:'Protein structures are predicted from sequence to near-experimental accuracy by a neural network trained on the PDB — solving neither the Schrödinger equation nor a force field. It raises the question of what, if anything, computational success contributes to understanding.'}
+ ],
+ exps:[
+  {n:'The Franck–Hertz experiment: energy levels are real', who:'Franck & Hertz, Berlin', y:'1914', fig:'franckhertz',
+   setup:'A tube containing mercury vapour at low pressure holds a heated cathode, a grid, and a collector plate. Electrons are accelerated from cathode to grid through a variable voltage V; a small retarding voltage (~0.5 V) between grid and plate stops electrons that have lost most of their energy. The plate current is measured as V is increased.',
+   meas:'The current rises with V, then drops sharply at 4.9 V, rises again, drops at 9.8 V, again at 14.7 V — equally spaced dips. Simultaneously the vapour emits ultraviolet light at 254 nm, whose photon energy is 4.9 eV.',
+   infer:'Atoms absorb energy only in discrete amounts. Below 4.9 eV collisions are elastic; at 4.9 eV an electron can excite the atom and loses exactly that energy, so it can no longer overcome the retarding voltage. The emitted 254 nm line closes the argument by showing the same quantum going back out as light.',
+   assume:'That the mercury pressure is high enough for collisions to be frequent but low enough that multiple excitations are rare; and that the contact potential between dissimilar electrode metals is accounted for — it shifts the whole curve without changing the 4.9 V spacing, which is why the *spacing*, not the absolute position, is the measurement.'},
+  {n:'X-ray crystallography: seeing molecular structure', who:'Bragg & Bragg 1913; Lonsdale 1929; Hodgkin 1945–64', y:'1913–', fig:'bragg',
+   setup:'A monochromatic X-ray beam (λ ≈ 0.1 nm, comparable to interatomic spacings) illuminates a single crystal mounted on a goniometer. Diffracted beams satisfying nλ = 2d sin θ are recorded on film or a detector as the crystal is rotated. The measured intensities give the magnitudes of the Fourier components of the electron density; the *phases* are lost, and must be recovered by isomorphous replacement with heavy atoms, by anomalous scattering, or by direct methods. A Fourier synthesis then produces an electron-density map into which atoms are fitted.',
+   meas:'Atomic positions to ~0.01 Å in small molecules. Kathleen Lonsdale showed in 1929 that benzene is planar with all six C–C bonds equal at 1.39 Å — settling the Kekulé structure question by measurement. Dorothy Hodgkin solved penicillin (1945), vitamin B₁₂ (1955, 181 atoms) and insulin (1969).',
+   infer:'Molecules have definite, reproducible three-dimensional structures with characteristic bond lengths and angles, transferable between compounds. This is the empirical basis of the whole structural-chemical level.',
+   assume:'That the crystal structure is the molecular structure — packing forces do shift conformations, and the crystallised form may not be the solution or in-vivo form. Also that the fitted model is the one the data support: the phase problem means a model is *assumed* and refined, so map interpretation is model-dependent in a way that has produced retracted structures.'},
+  {n:'Watching a conical intersection', who:'Zewail (femtochemistry); later attosecond and X-ray free-electron-laser groups', y:'1987–', fig:null,
+   setup:'A femtosecond pump pulse excites a molecule to a higher electronic surface; a delayed probe pulse — tuned to ionise, or to be absorbed only by a particular geometry, or (in XFEL experiments) to scatter X-rays off the instantaneous nuclear arrangement — interrogates the system. Scanning the delay in ~10 fs steps reconstructs the nuclear motion as a movie.',
+   meas:'Population transfers between electronic states in tens of femtoseconds — faster than a single vibrational period — at specific molecular geometries. In retinal, the cis–trans isomerisation that initiates vision completes in ~200 fs with ~65% quantum yield.',
+   infer:'The Born–Oppenheimer approximation fails, completely and routinely, exactly where photochemistry happens. At a conical intersection two electronic surfaces touch, the electronic and nuclear motions cannot be separated, and the molecule funnels between surfaces without emitting a photon.',
+   assume:'That the probe does not itself perturb the dynamics, and that the reconstructed signal reflects nuclear geometry rather than electronic rearrangement alone — which is why several complementary probes are used on the same system.'}
+ ],
+ assume:[
+  {a:'The Born–Oppenheimer separation of electronic and nuclear motion.', k:'idealisation', n:'The founding move, and it fails at conical intersections — that is, wherever photochemistry, vision and photosynthesis occur. Chemistry\'s central object is defined by an approximation that breaks down in the most interesting cases.'},
+  {a:'Nuclei have definite positions.', k:'contested', n:'Presupposed by the concept of a potential energy surface, and denied by the exact quantum treatment, whose eigenstates are rotationally invariant and have no molecular geometry at all.'},
+  {a:'The molecule is isolated.', k:'idealisation', n:'Woolley\'s point is that structure may only be well defined for a molecule *in interaction with an environment*; decoherence is what localises a chiral molecule into one enantiomer.'},
+  {a:'Relativistic effects are negligible.', k:'idealisation', n:'False for heavy elements: relativistic contraction of the 6s orbital is why gold is yellow and mercury is liquid, and why the lead–acid battery works at all.'},
+  {a:'A finite basis set suffices.', k:'auxiliary', n:'All results are basis-dependent, and quoted accuracies are meaningless without the basis. Complete-basis-set extrapolation is itself a fitted procedure.'},
+  {a:'The exchange–correlation functional is approximately known.', k:'contested', n:'DFT is exact in principle and approximate in every implementation. Functionals are parametrised against chemical reference data, so "first-principles" calculations are partly calibrated against the very level they are supposed to derive.'},
+  {a:'A single Slater determinant is a good starting point.', k:'idealisation', n:'Fails for bond dissociation, transition-metal clusters and excited states — the strongly correlated cases, which are also the chemically interesting ones.'},
+  {a:'Chemical accuracy is 1 kcal/mol.', k:'definition', n:'A convention, chosen because it corresponds to about a factor of five in an equilibrium constant at room temperature. It is roughly 0.4% of a typical bond energy: chemistry is decided in the fourth significant figure.'}
+ ],
+ notation:[
+  {s:R`\Psi(\mathbf{r};\mathbf{R})`, r:'"Psi of little-r semicolon big-R"', m:'The semicolon is doing real work: r are electronic coordinates that are integrated over, R are nuclear coordinates on which the wavefunction depends *parametrically* — as labels, not as dynamical variables. This punctuation mark is where molecular structure enters chemistry.', d:'m^{−3N/2}'},
+  {s:R`E_n(\mathbf{R})`, r:'"potential energy surface"', m:'The electronic energy as a function of nuclear geometry. A 3N−6 dimensional surface: for a 10-atom molecule, 24-dimensional. Minima are molecules, first-order saddles are transition states.', d:'hartree or kJ mol⁻¹'},
+  {s:R`E_h`, r:'"hartree", the atomic unit of energy', m:'27.211 eV = 2625.5 kJ/mol. Chemical accuracy (1 kcal/mol) is 1.6 millihartree — so quantum chemistry routinely needs six significant figures in a total energy to get four in a bond energy.', d:'J'},
+  {s:R`a_0`, r:'"bohr", the atomic unit of length', m:'0.529 177 Å = 5.29×10⁻¹¹ m. Bond lengths are 1.4–4 bohr. Papers quote geometries in Å and energies in hartree with no warning.', d:'m'},
+  {s:R`\phi_i,\ \varepsilon_i`, r:'"molecular orbital", "orbital energy"', m:'One-electron functions and their eigenvalues. Orbitals are *not observable* — they are artefacts of a particular approximation, and a unitary mixing of occupied orbitals leaves the total wavefunction and all observables unchanged. Photoelectron spectra approximate orbital energies via Koopmans\' theorem, which is why the fiction is so persuasive.', d:'—; hartree'},
+  {s:R`\Phi_{\rm SD}`, r:'"Slater determinant"', m:'An antisymmetrised product of orbitals. Antisymmetry is imposed by the determinant structure, which is why swapping two electrons changes the sign — the Pauli principle written as linear algebra.', d:'—'},
+  {s:R`E_{\rm corr}`, r:'"correlation energy"', m:'Defined as E_exact − E_HF, i.e. by reference to an approximation. About 1% of the total energy and essentially 100% of the chemistry. In water it is ~0.37 hartree ≈ 970 kJ/mol, larger than most bond energies.', d:'hartree'},
+  {s:R`n(\mathbf{r})`, r:'"electron density"', m:'A function of three variables, observable by X-ray diffraction, and by Hohenberg–Kohn sufficient in principle to determine everything. The dimensional collapse from 3N to 3 is the whole appeal of DFT.', d:'m⁻³'},
+  {s:R`E_{xc}[n]`, r:'"exchange–correlation functional"', m:'Everything DFT does not know how to compute. Its exact form exists by theorem and is unknown; LDA, GGA, meta-GGA, hybrid and double-hybrid form Perdew\'s "Jacob\'s ladder" of successive approximations.', d:'hartree'},
+  {s:R`\mathrm{CCSD(T)}`, r:'"coupled cluster singles doubles perturbative triples"', m:'The "gold standard": ~1 kcal/mol for well-behaved closed-shell molecules, at a cost scaling as N⁷ in the basis size. Doubling the molecule costs 128 times more.', d:'—'}
+ ],
+ worked:{t:'Why a chiral molecule stays left-handed: Hund\'s paradox, in numbers',
+  steps:[
+   'The exact molecular Hamiltonian commutes with parity, so its exact eigenstates are parity eigenstates: symmetric and antisymmetric combinations |L⟩ ± |R⟩. Neither is left- or right-handed.',
+   'The two handed forms are separated by a barrier; tunnelling splits the levels by ΔE and produces oscillation between L and R with period t = h/ΔE.',
+   'For D₂S₂ the barrier is low and t is of order microseconds — this molecule really does racemise by tunnelling.',
+   'For a typical amino acid the barrier is ~100 kJ/mol over a heavy-atom inversion coordinate, giving ΔE ~ 10⁻⁶⁵ J and t ~ 10⁶⁵ years — roughly 10⁵⁵ times the age of the universe.',
+   'Independently, collisional decoherence localises the molecule: at atmospheric pressure the environment measures the handedness some 10¹² times per second.'],
+  a:'Chirality — the property on which all biochemistry depends, since life uses L-amino acids and D-sugars exclusively — is not a term in the Hamiltonian and is not a property of any exact eigenstate. It is produced jointly by a dynamical barrier and by environmental decoherence. This is the best-quantified example of emergence anywhere in the sciences: every step is a number, the base-level description demonstrably lacks the property, and the higher-level property is nonetheless perfectly objective and load-bearing for an entire discipline.'}
+},
+
+bond: {
+ origin:[
+  {y:'1803–11', who:'Dalton; Gay-Lussac; Avogadro', t:'Atoms from weighing',
+   b:'Dalton infers atoms from the law of multiple proportions — that elements combine in small whole-number ratios by mass. Avogadro\'s hypothesis (equal volumes, equal numbers) resolves the contradictions but is ignored for fifty years, until Cannizzaro re-presents it at Karlsruhe in 1860 and atomic weights finally become consistent.'},
+  {y:'1852–58', who:'Frankland; Kekulé; Couper', t:'Valence and the carbon chain',
+   b:'Frankland notices that each element combines with a characteristic number of others. Kekulé and Couper independently give carbon a valence of four and the ability to bond to itself, making structural formulae possible. The electron would not be discovered for another 39 years: structural organic chemistry was built on a posit with no known mechanism.'},
+  {y:'1869', who:'Mendeleev', t:'Gaps, and predictions',
+   b:'Ordering elements by atomic weight and grouping by chemical behaviour, Mendeleev leaves gaps and predicts the properties of the missing elements in detail — eka-aluminium\'s density, melting point and oxide formula. Gallium (1875), scandium (1879) and germanium (1886) matched. He also deliberately reversed Te and I against their atomic weights because chemistry demanded it — vindicated in 1913 when Moseley showed the ordering principle is nuclear charge, not mass.'},
+  {y:'1874', who:'van \'t Hoff; Le Bel', t:'Chemistry becomes three-dimensional',
+   b:'Independently, both propose the tetrahedral carbon atom to explain optical isomerism. Kolbe responded with one of the most spectacular mis-assessments in the literature, denouncing it as "fantastical nonsense" from someone who had "abandoned exact chemical research". Van \'t Hoff received the first Nobel Prize in Chemistry.'},
+  {y:'1916–19', who:'Lewis; Langmuir', t:'The shared pair',
+   b:'Lewis proposes that a covalent bond is a shared pair of electrons and introduces the dot diagram and the octet rule — entirely from chemical evidence, and nine years before quantum mechanics could explain why pairing is favourable.'},
+  {y:'1931–39', who:'Pauling', t:'Hybridisation, resonance, electronegativity',
+   b:'*The Nature of the Chemical Bond* imports quantum mechanics into chemistry as a set of usable concepts rather than as a calculation: sp³ hybrids explain tetrahedral geometry, resonance handles benzene, and an electronegativity scale is constructed from measured bond energies. It shaped the discipline for fifty years — and its central concepts are approximations with no unique quantum-mechanical definition.'},
+  {y:'1965', who:'Woodward & Hoffmann', t:'Symmetry decides which reactions go',
+   b:'Orbital symmetry conservation predicts which pericyclic reactions proceed and with what stereochemistry. A symmetry argument at the molecular-orbital level, not a computation, and it explained a large body of previously puzzling selectivity at a stroke.'}
+ ],
+ exps:[
+  {n:'Mendeleev\'s gaps: eka-silicon becomes germanium', who:'Mendeleev 1871; Winkler 1886', y:'1871–86', fig:'mendeleev',
+   setup:'Not an apparatus but a prediction and its test. Mendeleev, from the position of a gap between silicon and tin, specified the properties of an unknown element: atomic weight ~72, density ~5.5 g/cm³, a dioxide of density ~4.7, a chloride boiling below 100 °C with density 1.9, and a grey metal of imperfect lustre. Fifteen years later Winkler, analysing the mineral argyrodite, found an unaccounted-for 7% of its mass and isolated a new element.',
+   meas:'Germanium: atomic weight 72.6 (predicted 72), density 5.35 (predicted 5.5), GeO₂ density 4.7 (predicted 4.7), GeCl₄ boiling at 86 °C with density 1.88 (predicted <100 °C, 1.9).',
+   infer:'The periodic classification is not a mnemonic but a law with predictive content. Winkler initially thought he had found the wrong element; Mendeleev identified it as eka-silicon from the published properties.',
+   assume:'That the ordering variable is atomic weight — which is wrong, as the Te/I and Ar/K inversions show. Mendeleev knowingly violated his own ordering principle where chemistry demanded it, and was vindicated when Moseley\'s X-ray spectra showed the true variable is nuclear charge. A striking case of a theory\'s predictive success surviving an error in its own stated foundation.'},
+  {n:'Pasteur separates enantiomers by hand', who:'Louis Pasteur, Paris', y:'1848', fig:'pasteur',
+   setup:'Sodium ammonium tartrate from wine lees rotates polarised light; the same salt prepared from "racemic acid" does not. Pasteur crystallises the racemic salt below 26 °C and examines the crystals under a lens: they show small hemihedral faces, and come in two mirror-image forms. He sorts them physically with tweezers into two piles, redissolves each, and measures the optical rotation of each solution in a polarimeter.',
+   meas:'One pile rotates polarised light to the right by the same amount that the natural tartrate does; the other rotates it equally to the left. A 50:50 mixture is optically inactive.',
+   infer:'Optical activity originates in the three-dimensional arrangement of atoms within the molecule, not in the bulk crystal — because it survives dissolution. This is the origin of stereochemistry, twenty-six years before the tetrahedral carbon was proposed to explain it.',
+   assume:'That the hemihedral crystal faces track molecular handedness. Pasteur was fortunate: sodium ammonium tartrate is one of relatively few racemates that form separable conglomerates rather than racemic compounds, and only below 26 °C. Had his laboratory been warmer, the experiment would have failed.'},
+  {n:'Benzene is a regular hexagon', who:'Kathleen Lonsdale, Royal Institution', y:'1929', fig:null,
+   setup:'X-ray diffraction on a single crystal of hexamethylbenzene, chosen because it crystallises in a triclinic form simple enough to solve without phase-determination methods that did not yet exist. Lonsdale measured the intensities and worked out the structure by hand.',
+   meas:'The six ring carbons are coplanar and form a regular hexagon with all C–C distances equal at 1.39 Å — intermediate between a single bond (1.54 Å) and a double bond (1.34 Å).',
+   infer:'Benzene has no alternating single and double bonds. Kekulé\'s two structures are not rapidly interconverting isomers; the molecule has one structure that neither Lewis diagram describes. "Resonance" is a way of speaking about a single delocalised state using a vocabulary designed for localised ones.',
+   assume:'That hexamethylbenzene\'s ring is representative of benzene\'s — reasonable, and confirmed later directly. The deeper assumption is that the electron-density maximum between atoms locates a bond, which is exactly the point at issue in the QTAIM debates.'}
+ ],
+ assume:[
+  {a:'Atoms retain their identity in compounds.', k:'definition', n:'The founding assumption of structural chemistry. Approximately true — core electrons are almost unperturbed — and Kohn\'s "nearsightedness" theorem later explains why.'},
+  {a:'Bonds are localised between atom pairs.', k:'idealisation', n:'Fails for benzene, for metals, for boranes with three-centre two-electron bonds, and for anything requiring resonance. The molecular graph is a very good approximation that is known to be false in specific, well-catalogued ways.'},
+  {a:'Valence is a fixed property of an element.', k:'idealisation', n:'Useful and false: sulphur shows 2, 4 and 6; the transition metals shift freely.'},
+  {a:'Bond energies are transferable between molecules.', k:'empirical', n:'Additivity holds to within a few percent. Kohn\'s nearsightedness principle gives the reason: the density at a point depends on the potential only within a screening length of about 1 Å.'},
+  {a:'Electronegativity is a well-defined property of an atom.', k:'contested', n:'There are at least five inequivalent scales — Pauling (from bond energies), Mulliken (from ionisation energy and electron affinity), Allred–Rochow, Allen, Sanderson — giving different numbers, all in use, none derivable from the others.'},
+  {a:'Oxidation state is determinate.', k:'contested', n:'A bookkeeping convention that IUPAC revised as recently as 2016. It organises all of inorganic chemistry and electrochemistry while being, in ambiguous cases, a matter of stipulation.'},
+  {a:'The octet rule.', k:'idealisation', n:'Works for the second period, fails above it (SF₆, PCl₅) and below it (BF₃). Whether hypervalency involves d-orbital participation was debated for decades; the modern answer is that it mostly does not.'},
+  {a:'Aromaticity is a single property.', k:'contested', n:'Diagnosed by energetic, magnetic (NICS), geometric and electronic criteria that do not always agree. A concept doing heavy explanatory work while resisting definition.'}
+ ],
+ notation:[
+  {s:R`\mathrm{C{-}C},\ \mathrm{C{=}C},\ \mathrm{C{\equiv}C}`, r:'"single, double, triple bond"', m:'1.54, 1.34 and 1.20 Å; 348, 614 and 839 kJ/mol. Note a double bond is not twice a single bond — the second component is a weaker π bond, which is why alkenes react by addition.', d:'Å; kJ mol⁻¹'},
+  {s:R`\sigma,\ \pi`, r:'"sigma bond", "pi bond"', m:'Classified by symmetry about the internuclear axis: σ is cylindrically symmetric and allows free rotation; π has a nodal plane containing the axis and locks the geometry, which is why cis/trans isomerism exists.', d:'—'},
+  {s:R`sp^3,\ sp^2,\ sp`, r:'"s-p-three", etc.', m:'Hybrid orbitals giving 109.5°, 120° and 180° geometries. A change of basis within the same wavefunction, so hybridisation is a representational choice rather than a physical process — atoms do not "hybridise" before bonding.', d:'—'},
+  {s:R`\leftrightarrow`, r:'"resonance arrow"', m:'Denotes contributing structures to one state. Not an equilibrium — the double-headed arrow ⇌ means something entirely different. No resonance structure has any separate existence.', d:'—'},
+  {s:R`\chi`, r:'"electronegativity"', m:'Pauling scale: F 3.98, O 3.44, C 2.55, H 2.20, Cs 0.79. Dimensionless and scale-dependent. Not the magnetic susceptibility, for which χ is also standard.', d:'dimensionless'},
+  {s:R`\delta^+,\ \delta^-`, r:'"partial charges"', m:'Indicate polarity direction. Quantitative partial charges are not observables: Mulliken, Löwdin, NBO, Hirshfeld and CHELPG schemes give different numbers for the same molecule, sometimes differing by more than an electron.', d:'e'},
+  {s:R`R/S,\ E/Z,\ D/L,\ (+)/(-)`, r:'"absolute configuration", "alkene geometry", "sugar/amino-acid series", "optical rotation"', m:'Four independent labelling systems, routinely confused. R/S is assigned by CIP priority rules; D/L is relative to glyceraldehyde; (+)/(−) is the measured sign of rotation. An L-amino acid may be R or S and may rotate either way — the labels carry different information.', d:'—'},
+  {s:R`\alpha,\ \beta`, r:'"Hückel parameters"', m:'The Coulomb integral (energy of an electron in a 2p orbital, ≈ −11.4 eV) and the resonance integral (≈ −2.7 eV). Two fitted numbers reproduce the whole of aromatic π chemistry — an early and explicit effective theory.', d:'eV'},
+  {s:R`4n+2`, r:'"Hückel\'s rule"', m:'A planar cyclic conjugated system with 4n+2 π electrons is aromatic; 4n is antiaromatic and destabilised. Benzene has 6 = 4(1)+2. Derived from the eigenvalue pattern of a cyclic graph — graph theory determining chemical behaviour.', d:'—'}
+ ],
+ worked:{t:'Reading a reaction off the molecular graph, with no quantum mechanics',
+  steps:[
+   'Question: will cyclobutadiene (C₄H₄, a planar four-membered ring with two double bonds) be a stable aromatic molecule like benzene?',
+   'Count π electrons: four. Apply Hückel: 4n+2 requires 6, 10, 14…; four electrons is 4n with n = 1, so the system is antiaromatic.',
+   'The Hückel eigenvalues for a cycle of n atoms are α + 2β cos(2πj/n). For n = 4: α+2β, α, α, α−2β. Four electrons fill the lowest level (2 electrons) and then must occupy the two *degenerate non-bonding* levels singly.',
+   'Delocalisation energy relative to two isolated double bonds: 4α + 4β − (4α + 4β) = 0. No stabilisation at all, plus an open-shell triplet-like configuration.',
+   'Prediction: unstable, and it will distort to a rectangle to break the degeneracy (Jahn–Teller).',
+   'Observed: cyclobutadiene has a half-life of milliseconds at room temperature, was isolated only in 1972 by trapping in an argon matrix at 8 K, and is rectangular, not square.'],
+  a:'A two-parameter model on a graph — count the ring, count the electrons — correctly predicts that one molecule is among the most stable in organic chemistry and its near-neighbour is among the least, and further predicts the geometric distortion. No Schrödinger equation is solved. This is why the structural level persisted and grew after quantum mechanics arrived: it delivers answers of a kind, and at a speed, that the lower level does not. Whatever reduction means here, it evidently does not mean replacement.'}
+},
+
+chemkin: {
+ origin:[
+  {y:'1864', who:'Guldberg & Waage', t:'The law of mass action',
+   b:'Rate proportional to the product of "active masses" — concentrations. Published in Norwegian and ignored for a decade until republished in German. It gave equilibrium a quantitative form for the first time.'},
+  {y:'1884–89', who:'van \'t Hoff; Arrhenius', t:'The temperature dependence',
+   b:'Van \'t Hoff writes d(ln K)/dT = ΔH/RT² from thermodynamics. Arrhenius reinterprets the analogous rate expression k = Ae^{−Ea/RT} physically: only molecules with energy above a threshold can react. His doctoral thesis on electrolytic dissociation had been passed with the lowest possible grade; he received the Nobel in 1903.'},
+  {y:'1876–78', who:'Gibbs', t:'Free energy and the criterion of spontaneity',
+   b:'ΔG < 0 at constant T and P. This single inequality decides the direction of every chemical process, and — with chemical potential — makes multiphase, multicomponent equilibrium calculable.'},
+  {y:'1918–35', who:'Lindemann; Eyring; Evans & Polanyi', t:'Transition state theory',
+   b:'Lindemann explains how unimolecular reactions can have a rate at all (collisional activation followed by delayed reaction). Eyring and, independently, Evans and Polanyi construct absolute rate theory: assume a quasi-equilibrium with the saddle-point configuration, and the rate follows from statistical mechanics with the universal prefactor k_BT/h.'},
+  {y:'1923–32', who:'Michaelis & Menten; Briggs & Haldane', t:'Kinetics of enzymes',
+   b:'Michaelis and Menten assume rapid equilibrium binding; Briggs and Haldane replace this with the steady-state approximation, which is more general and gives the same functional form with a differently interpreted K_M. The distinction matters: K_M is a dissociation constant only in the rapid-equilibrium limit.'},
+  {y:'1956–65', who:'Marcus', t:'Electron transfer, and an inverted region',
+   b:'Marcus theory predicts that beyond a certain driving force, reactions get *slower* as they become more exergonic. Chemists disbelieved it for 25 years until Miller and Closs demonstrated it in 1984 with a rigid molecular spacer series. Nobel 1992.'},
+  {y:'1977–99', who:'Prigogine; Zewail', t:'Far from equilibrium, and very fast',
+   b:'Prigogine\'s dissipative structures show that sustained throughput can generate order — chemical clocks, waves, patterns — making life thermodynamically intelligible. Zewail\'s femtosecond spectroscopy brings the transition-state region itself within observational reach.'}
+ ],
+ exps:[
+  {n:'The Arrhenius plot', who:'Arrhenius 1889; universal since', y:'1889–', fig:'arrhenius',
+   setup:'Measure the rate constant k of a reaction at a series of temperatures held constant to ±0.1 K in a thermostatted bath. Concentrations are followed by whatever probe suits — titration, conductivity, absorbance, pressure. Plot ln k against 1/T.',
+   meas:'A straight line for most reactions over a moderate temperature range, of slope −E_a/R and intercept ln A. For a typical organic reaction with E_a ≈ 80 kJ/mol, the rate roughly doubles for each 10 K rise near room temperature.',
+   infer:'A definite energy barrier controls the rate, and only the small fraction of collisions in the high-energy tail of the Boltzmann distribution is effective. E_a and A are *operational* quantities defined by this plot, not by any structural picture.',
+   assume:'That E_a and A are temperature-independent. Strictly false — transition state theory gives k ∝ T e^{−ΔG‡/RT}, so the plot has mild curvature, usually invisible over a 50 K range. Where measurements span a wide range, or where tunnelling contributes, the curvature is real and diagnostic. So the Arrhenius "activation energy" is a fitted parameter of a model that the more fundamental theory says is only approximately right.'},
+  {n:'Stopped-flow and the shape of an enzyme curve', who:'Chance 1940s; standard since', y:'1940s–', fig:'stoppedflow',
+   setup:'Two syringes drive enzyme and substrate solutions into a mixing chamber in under a millisecond; the flow stops abruptly against a block, and absorbance or fluorescence in the observation cell is recorded from that instant. Initial rates are measured at a series of substrate concentrations, with enzyme concentration held far below substrate.',
+   meas:'Rate versus [S] is a rectangular hyperbola saturating at V_max, with half-saturation at K_M. For catalase, k_cat ≈ 4×10⁷ s⁻¹; for carbonic anhydrase k_cat/K_M ≈ 10⁸ M⁻¹s⁻¹, at the diffusion limit.',
+   infer:'The enzyme forms a discrete complex with its substrate, and that complex saturates. The hyperbolic form is direct evidence for a finite number of binding sites — inferred from kinetics alone, decades before any enzyme structure was known.',
+   assume:'The steady-state approximation, valid when [E]₀ ≪ [S]₀, plus the assumption that only initial rates are measured so that product inhibition and enzyme denaturation do not intrude. The approximation is a singular perturbation: the fast variable [ES] is slaved to the slow variable [S], which is formally the same manoeuvre as integrating out a heavy field in an effective field theory.'},
+  {n:'The Belousov–Zhabotinsky reaction: chemistry that oscillates', who:'Belousov 1951; Zhabotinsky 1961', y:'1951–', fig:'bz',
+   setup:'Malonic acid, bromate and a cerium or ferroin catalyst in sulphuric acid, stirred in a beaker or left unstirred in a thin layer in a Petri dish. The oxidation state of the catalyst is followed by colour (ferroin: red ⇌ blue) or by a platinum electrode.',
+   meas:'In a stirred vessel the colour oscillates with a period of tens of seconds, for many cycles, before settling to equilibrium. Unstirred, target patterns and rotating spiral waves propagate at ~mm/min.',
+   infer:'A closed chemical system far from equilibrium can sustain temporal and spatial order. Free energy still decreases monotonically overall; the oscillation is in the concentrations of intermediates, driven by autocatalysis and feedback.',
+   assume:'That the system is genuinely closed and not being driven externally — Belousov\'s papers were rejected twice, one editor insisting the result was impossible because it appeared to violate the Second Law. It does not: the oscillation rides on a monotonic downhill slide in Gibbs energy. The episode is a documented case of a correct experimental result being suppressed because it contradicted a misapplied theoretical principle.'}
+ ],
+ assume:[
+  {a:'Concentrations are smooth and deterministic.', k:'idealisation', n:'Fails at low copy number. A bacterium may hold ten molecules of a transcription factor, where the chemical master equation and Poissonian noise are required — the same breakdown as hydrodynamics at high Knudsen number.'},
+  {a:'The system is well mixed.', k:'idealisation', n:'False in cells, which are crowded (~300 g/L protein), compartmentalised and increasingly known to be organised by phase-separated condensates.'},
+  {a:'Transition state theory: quasi-equilibrium with the saddle point, and no recrossing.', k:'idealisation', n:'Recrossing is real and is patched by a transmission coefficient κ ≤ 1 fitted after the fact. The choice of dividing surface is also not unique.'},
+  {a:'The Born–Oppenheimer surface exists and the reaction follows a path on it.', k:'idealisation', n:'Inherited from quantum chemistry, and it fails for photochemical reactions at conical intersections.'},
+  {a:'Nuclear motion is classical.', k:'idealisation', n:'Hydrogen tunnels. Kinetic isotope effects k_H/k_D far above the semiclassical maximum of ~7 are routine in enzymes, reaching 50 or more, and are direct evidence of quantum tunnelling in biology.'},
+  {a:'Rate constants are constants.', k:'idealisation', n:'They depend on solvent, ionic strength, pressure and — for a single enzyme molecule watched in isolation — on time, since conformational states interconvert on the timescale of turnover ("dynamic disorder").'},
+  {a:'Elementary steps are unimolecular or bimolecular.', k:'empirical', n:'Termolecular collisions are rare enough to neglect, which is why a mechanism can be built from a small vocabulary of step types.'},
+  {a:'The mechanism inferred is the true one.', k:'contested', n:'Mechanisms are never observed; they are inferred from kinetics, isotope effects, stereochemistry and trapped intermediates, and are underdetermined in principle. Several long-accepted mechanisms have been overturned.'}
+ ],
+ notation:[
+  {s:R`k`, r:'"rate constant"', m:'Its units reveal the reaction order: s⁻¹ for first order, M⁻¹s⁻¹ for second. Not the Boltzmann constant (k_B), not a wavevector, not a force constant.', d:'varies with order'},
+  {s:R`K`, r:'"equilibrium constant"', m:'Dimensionless when written properly in terms of activities relative to a standard state. ΔG° = −RT ln K, so at 298 K a factor of ten in K corresponds to 5.7 kJ/mol.', d:'dimensionless'},
+  {s:R`E_a`, r:'"Arrhenius activation energy"', m:'The slope of ln k against 1/T, times −R. An *operational* quantity, not identical to the barrier height ΔE‡ on the potential energy surface, and not identical to ΔG‡ or ΔH‡ either.', d:'kJ mol⁻¹'},
+  {s:R`\Delta G^{\ddagger},\ \Delta H^{\ddagger},\ \Delta S^{\ddagger}`, r:'"free energy, enthalpy and entropy of activation"', m:'Eyring parameters. A large negative ΔS‡ indicates an ordered transition state — two molecules coming together and losing translational freedom — and is a standard mechanistic diagnostic.', d:'kJ mol⁻¹; J mol⁻¹K⁻¹'},
+  {s:R`k_{\rm cat},\ K_M,\ k_{\rm cat}/K_M`, r:'"turnover number", "Michaelis constant", "catalytic efficiency"', m:'k_cat is the maximum turnovers per second per active site; K_M is the substrate concentration at half V_max; their ratio is the apparent second-order rate constant at low substrate and is the quantity bounded by diffusion at ~10⁸–10⁹ M⁻¹s⁻¹. K_M equals the dissociation constant only under rapid equilibrium.', d:'s⁻¹; M; M⁻¹s⁻¹'},
+  {s:R`\nu_i`, r:'"stoichiometric coefficient"', m:'Negative for reactants, positive for products. Distinct from the reaction *order*, which is empirical and need not match — a fact that is the main evidence for multi-step mechanisms.', d:'dimensionless'},
+  {s:R`\lambda`, r:'"reorganisation energy" (Marcus)', m:'The energy to distort the reactants and solvent to the product geometry without transferring the electron. The inverted region appears when −ΔG° > λ, and finding it required designing molecules with fixed donor–acceptor separations.', d:'eV or kJ mol⁻¹'},
+  {s:R`\kappa`, r:'"transmission coefficient"', m:'The correction factor in TST for recrossing and tunnelling. Below 1 for recrossing, above 1 for tunnelling. It absorbs everything the theory does not model — a fitted parameter standing where an explanation should be.', d:'dimensionless'},
+  {s:R`\rightleftharpoons,\ \rightarrow,\ \leftrightarrow`, r:'"equilibrium", "reaction", "resonance"', m:'Three arrows meaning three unrelated things: a reversible reaction, an irreversible step, and contributing structures to one state. Confusing the first and third is the commonest notational error in chemistry.', d:'—'}
+ ],
+ worked:{t:'What a catalyst actually buys you',
+  steps:[
+   'Eyring: k = (k_BT/h)e^{−ΔG‡/RT}. At 298 K, k_BT/h = 6.21×10¹² s⁻¹.',
+   'Uncatalysed reaction with ΔG‡ = 100 kJ/mol: k = 6.21×10¹² × e^{−100000/(8.314×298)} = 6.21×10¹² × e^{−40.4} = 1.8×10⁻⁵ s⁻¹, a half-life of about 11 hours.',
+   'Lower the barrier by 40 kJ/mol: k = 6.21×10¹² × e^{−24.2} = 1.9×10² s⁻¹. Speed-up factor e^{40000/2478} = e^{16.1} = 1.0×10⁷.',
+   'General rule: every 5.7 kJ/mol of barrier reduction at 298 K buys one order of magnitude in rate.',
+   'Orotidine 5′-monophosphate decarboxylase reduces its barrier by about 100 kJ/mol, converting an uncatalysed half-life of 78 million years into 18 milliseconds — a factor of 1.4×10¹⁷.'],
+  a:'Note what the catalyst does not do: ΔG° is unchanged, so the equilibrium position is identical with and without it. Thermodynamics fixes what is possible; kinetics fixes what happens. Nearly the whole of the organic world, including every molecule in your body, is thermodynamically unstable with respect to CO₂ and water, and persists only because the barriers are high. Life is a kinetically trapped state maintained by the selective lowering of particular barriers — which is the precise sense in which biological organisation has causal consequences without any new physics: it selects among microphysically permitted pathways.'}
+}
+};
