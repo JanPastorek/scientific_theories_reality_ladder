@@ -359,9 +359,9 @@ function showSheets(){ tabSheets.setAttribute('aria-selected','true'); tabMap.se
   document.getElementById('view-sheets').hidden=false; document.getElementById('view-map').hidden=true; }
 const tabSheets=document.getElementById('tab-sheets'), tabMap=document.getElementById('tab-map');
 tabSheets.onclick = showSheets;
-tabMap.onclick = ()=>{ tabMap.setAttribute('aria-selected','true'); tabSheets.setAttribute('aria-selected','false');
-  document.getElementById('view-sheets').hidden=true; document.getElementById('view-map').hidden=false;
-  window.scrollTo({top:0,behavior:'instant'}); };
+function showMap(){ tabMap.setAttribute('aria-selected','true'); tabSheets.setAttribute('aria-selected','false');
+  document.getElementById('view-sheets').hidden=true; document.getElementById('view-map').hidden=false; }
+tabMap.onclick = ()=>{ showMap(); window.scrollTo({top:0,behavior:'instant'}); };
 
 document.getElementById('expandall').onclick = ()=>{
   const root = document.getElementById('view-map').hidden ? sheet : document.getElementById('view-map');
@@ -377,10 +377,14 @@ document.getElementById('themebtn').onclick = ()=>{
 };
 try{ const s=localStorage.getItem('rl-theme'); if(s) document.documentElement.setAttribute('data-theme',s); }catch(e){}
 
+/* The relation map is the landing view: the typed arrows between theories are the
+   point of the atlas, and a sheet is what you open from one. A #theory-id in the
+   URL still opens that sheet directly, so every link into a sheet keeps working. */
 const start = (location.hash||'').slice(1);
 renderRail();
-renderSheet(BY[start] ? start : 'qg');
 renderMap();
+if(BY[start]){ renderSheet(start); showSheets(); }
+else { renderSheet('qg'); showMap(); try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){} }
 
 /* ---------------- search ---------------- */
 let IDX = null;

@@ -27,8 +27,9 @@ No build step, no framework, no server.
 
 ## The relation map
 
-The second tab draws every theory as a node and every inter-theory relation as an edge, typed by
-what kind of relation it actually is:
+The map is the landing view, because the typed arrows between theories are the point and a sheet
+is what you open from one. It draws every theory as a node and every inter-theory relation as an
+edge, typed by what kind of relation it actually is:
 
 - **limit** — a regular expansion in a small dimensionless parameter
 - **singular** — the limit does not exist pointwise, and the interesting physics lives where it fails
@@ -52,7 +53,8 @@ examples, disputes, further reading and every relation. Arrow keys navigate, Ent
 ## Layout
 
 ```
-index.html        the atlas
+index.html        the atlas — opens on the relation map; the Sheets tab, or a #theory-id in
+                  the URL, opens an individual sheet
 print.html        A4 print build — open and print to PDF
 map.html          A3 wall chart of the relation map
 app.js            rendering, the relation map, and the search index

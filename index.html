@@ -338,8 +338,8 @@ mjx-container[display="true"]{margin:0 !important}
       </div>
       <div class="tools">
         <div class="tabs" role="tablist">
-          <button role="tab" id="tab-sheets" aria-selected="true">Sheets</button>
-          <button role="tab" id="tab-map" aria-selected="false">Relation map</button>
+          <button role="tab" id="tab-map" aria-selected="true">Relation map</button>
+          <button role="tab" id="tab-sheets" aria-selected="false">Sheets</button>
         </div>
         <div class="srchbox"><input id="q" type="search" placeholder="Search theories, concepts, people, experiments…" autocomplete="off" spellcheck="false" aria-label="Search the atlas"><div class="results" id="results" hidden></div></div>
         <button class="ico" id="expandall" title="Expand or collapse all detail">±</button>
@@ -351,11 +351,11 @@ mjx-container[display="true"]{margin:0 !important}
 </header>
 
 <main class="wrap">
-  <div class="shell" id="view-sheets">
+  <div class="shell" id="view-sheets" hidden>
     <nav class="rail" id="rail" aria-label="Theories"></nav>
     <article class="sheet" id="sheet"></article>
   </div>
-  <div class="mapwrap" id="view-map" hidden>
+  <div class="mapwrap" id="view-map">
     <div class="maplegend" id="maplegend"></div>
     <div class="mapscroll"><svg id="mapsvg" viewBox="0 0 1080 1130" role="img" aria-label="Map of inter-theory relations"></svg></div>
     <div class="maplist" id="maplist"></div>
